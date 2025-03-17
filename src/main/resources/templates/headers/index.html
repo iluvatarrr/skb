@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заголовков</title>
+</head>
+<body>
+<h1>Заголовки запроса</h1>
+<ul>
+    <th:block th:each="entry : ${headers}">
+        <li th:text="${entry.key} + ':: ' + ${entry.value}"></li>
+    </th:block>
+</ul>
+</body>
+</html>
