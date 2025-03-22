@@ -1,5 +1,7 @@
 package com.example.skb_spring.controller;
 
+import com.example.skb_spring.dto.ReceiptIn;
+import com.example.skb_spring.dto.ReceiptOut;
 import com.example.skb_spring.exception.BadGatewayException;
 import com.example.skb_spring.model.Receipt;
 import com.example.skb_spring.service.ReceiptService;
@@ -17,8 +19,7 @@ public class ReceiptController {
     ReceiptService receiptService;
 
     @PostMapping("/add")
-    public Receipt addReceipt(@RequestBody Receipt receipt) {
-        //dto для маленькой учебной задачи не умеет смысла логически и функционально - делать не стал
+    public ReceiptOut addReceipt(@RequestBody ReceiptIn receipt) {
         return receiptService.addToDB(receipt);
     }
 

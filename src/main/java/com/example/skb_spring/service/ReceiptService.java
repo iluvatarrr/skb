@@ -1,5 +1,7 @@
 package com.example.skb_spring.service;
 
+import com.example.skb_spring.dto.ReceiptIn;
+import com.example.skb_spring.dto.ReceiptOut;
 import com.example.skb_spring.model.Receipt;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,16 +17,30 @@ public class ReceiptService {
 
     static List<Receipt> DB = new ArrayList<>();
 
-    InfoService infoService;
-
-    public Receipt addToDB(Receipt receipt) {
-        receipt = updateReceipt(receipt);
-        DB.add(receipt);
-        return receipt;
+    public ReceiptOut addToDB(ReceiptIn receipt) {
+        var receiptModel = mapToModel(receipt);
+        updateReceipt(receiptModel);
+        DB.add(receiptModel);
+        return mapToDto(receiptModel);
     }
 
-    private Receipt updateReceipt(Receipt receipt) {
-        var info = infoService.createInfo(receipt.info(), DB.size());
-        return new Receipt(receipt.price(), info);
+    private Receipt mapToModel(ReceiptIn receiptIn) {
+        return Receipt.builder()
+                .price(receiptIn.getPrice())
+                .id(null)
+                .date(receiptIn.getInfo().getDate()).build();
+    }
+
+    private ReceiptOut mapToDto(Receipt receipt) {
+        return ReceiptOut.builder()
+                .price(receipt.getPrice())
+                .info(ReceiptOut.Info.builder()
+                        .id(receipt.getId())
+                        .date(receipt.getDate())
+                        .build()).build();
+    }
+
+    private void updateReceipt(Receipt receipt) {
+        receipt.setId(DB.size() + 1);
     }
 }

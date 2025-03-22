@@ -1,4 +1,13 @@
 package com.example.skb_spring.model;
 
-public record Receipt(double price, Info info) {
+import lombok.Builder;
+import lombok.Data;
+import java.util.Date;
+
+@Data
+@Builder
+public class Receipt {
+    double price;
+    Integer id;
+    Date date;
 }
