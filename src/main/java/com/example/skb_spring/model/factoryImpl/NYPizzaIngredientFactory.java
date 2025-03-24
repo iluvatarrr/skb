@@ -4,8 +4,6 @@ import com.example.skb_spring.intef.PizzaIngredientFactory;
 import com.example.skb_spring.intef.ingredients.Cheese;
 import com.example.skb_spring.intef.ingredients.Dough;
 import com.example.skb_spring.intef.ingredients.Sauce;
-import com.example.skb_spring.intef.ingredients.Clams;
-import com.example.skb_spring.model.ingredientsImpl.FreshClams;
 import com.example.skb_spring.model.ingredientsImpl.MarinaraSauce;
 import com.example.skb_spring.model.ingredientsImpl.ReggianoCheese;
 import com.example.skb_spring.model.ingredientsImpl.ThinCrustDough;
@@ -27,9 +25,5 @@ public class NYPizzaIngredientFactory implements PizzaIngredientFactory {
     @Override
     public Cheese createCheese() {
         return new ReggianoCheese();
-    }
-    @Override
-    public Clams createClam() {
-        return new FreshClams();
     }
 }

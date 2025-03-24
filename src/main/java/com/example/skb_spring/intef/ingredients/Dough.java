@@ -1,7 +1,5 @@
 package com.example.skb_spring.intef.ingredients;
 
-import org.springframework.stereotype.Component;
-
+//просто маркерный интерфейс
 public interface Dough {
-    void create();
 }

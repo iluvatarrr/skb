@@ -3,8 +3,4 @@ package com.example.skb_spring.model.ingredientsImpl;
 import com.example.skb_spring.intef.ingredients.Sauce;
 
 public class PlumTomatoSauce implements Sauce {
-    @Override
-    public void create() {
-
-    }
 }

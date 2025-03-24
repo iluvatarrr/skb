@@ -1,51 +1,62 @@
 package com.example.skb_spring.controller;
 
-import com.example.skb_spring.intef.Pizza;
 import com.example.skb_spring.intef.PizzaStore;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
-@AllArgsConstructor()
+@Slf4j
+@Controller
+@AllArgsConstructor
 public class PizzaController {
+    //в угоду задания сделал разные способы DI у похожих компонентов,
+    // через поле в классе NYPizzaStore и ChicagoPizzaStore
 
+    //конструктор
     private final PizzaStore NYPizzaStore;
-    private final PizzaStore chicagoPizzaStore;
+
+    //сеттер
+    private PizzaStore chicagoPizzaStore;
+
+    @Autowired
+    public void setChicagoPizzaStore(PizzaStore chicagoPizzaStore) {
+        this.chicagoPizzaStore = chicagoPizzaStore;
+    }
 
     @GetMapping("NYPizza")
-    public String getNYCheesePizza(@RequestParam String type) {
-        //cheese or clam - те, что реализованы в фабрике, хендлер неверного типа делать не стал, т.к не по заданию
-        //http://localhost:8081/NYPizza?type=cheese - пример ссылки
-        Pizza pizza = NYPizzaStore.orderPizza(type);
-        return getPizza(pizza);
+    public String getNYCheesePizza(Model model) {
+        //после упрощения кода и абстракций фабрика стала делать только сырную пиццу и то текстом)
+        //http://localhost:8081/NYPizza - пример ссылки
+        var pizza = getPizza(NYPizzaStore.createPizza());
+        model.addAttribute("pizza", pizza);
+        return "NY";
     }
 
     @GetMapping("ChicagoPizza")
-    public String getChicagoCheesePizza(@RequestParam String type) {
-        //cheese or clam - те, что реализованы в фабрике, хендлер неверного типа делать не стал, т.к не по заданию
-        //http://localhost:8081/ChicagoPizza?type=clam - пример ссылки
-        Pizza pizza = chicagoPizzaStore.orderPizza(type);
-        return getPizza(pizza);
+    public String getChicagoCheesePizza(Model model) {
+        //после упрощения кода и абстракций фабрика стала делать только сырную пиццу и то текстом)
+        //http://localhost:8081/ChicagoPizza - пример ссылки
+        var pizza = getPizza(chicagoPizzaStore.createPizza());
+        model.addAttribute("pizza", pizza);
+        return "chicago";
     }
 
-    public String getPizza(Pizza pizza) {
-        return "<h1>it's was a %s with %s and %s!</h1>".formatted(
-                pizza.getName(),
-                pizza.cheese.getClass().getSimpleName(),
-                pizza.dough.getClass().getSimpleName());
+    public String getPizza(String pizza) {
+        return "it's was a %s".formatted(pizza);
     }
 
     @PostConstruct
     public void init() {
-        System.out.println("Pizza Controller bean initialized");
+        log.info("Pizza Controller bean initialized!");
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("Pizza Controller bean destroyed");
+        log.info("Pizza Controller bean destroyed!");
     }
 }

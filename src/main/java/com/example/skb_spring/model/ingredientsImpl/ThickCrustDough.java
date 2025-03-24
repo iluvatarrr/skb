@@ -3,8 +3,4 @@ package com.example.skb_spring.model.ingredientsImpl;
 import com.example.skb_spring.intef.ingredients.Dough;
 
 public class ThickCrustDough implements Dough {
-    @Override
-    public void create() {
-
-    }
 }
