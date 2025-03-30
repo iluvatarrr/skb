@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: skb-spring
+app:
+  name: app-dev
+  list:
+    - valDev1
+    - valDev2
+  env-val: ${env-value:default}

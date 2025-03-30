@@ -1,0 +1,6 @@
+app:
+  name: app-prod
+  list:
+    - valProd1
+    - valProd2
+  env-val: ${env-value:default}

@@ -1,0 +1,6 @@
+app:
+  name: app-test
+  list:
+    - valTest1
+    - valTest2
+  env-val: ${env-value:default}
