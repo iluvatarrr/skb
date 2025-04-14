@@ -1,6 +1,5 @@
 package com.example.skb_spring.controller;
 
-
 import com.example.skb_spring.dto.UserDto;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
