@@ -1,13 +1,13 @@
-package com.example.skb_spring;
+package ru.skb.producer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SkbSpringApplicationTests {
+class ProducerApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
