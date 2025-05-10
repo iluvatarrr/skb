@@ -6,9 +6,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @AllArgsConstructor
@@ -25,8 +23,9 @@ public class DataBaseTaskController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> save(@RequestBody ToDoDto toDoDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody ToDoDto toDoDto) {
         toDoService.save(toDoDto);
-        return ResponseEntity.ok(HttpStatus.CREATED);
     }
+
 }

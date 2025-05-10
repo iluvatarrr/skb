@@ -1,14 +1,17 @@
 spring:
-  config:
-    import: classpath:.properties
   application:
-    name: ${NAME}
+    name: ${NAME:skb-spring}
   datasource:
-    driver-class-name: ${POSTGRES_DRIVER}
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
+    driver-class-name: ${POSTGRES_DRIVER:org.postgresql.Driver}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/to_do}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
   jpa:
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
-        showSql: true
+        show_sql: true
+
+server:
+  port: 8081

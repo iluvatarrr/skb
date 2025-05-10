@@ -6,10 +6,8 @@ import com.example.skb_spring.repository.ToDoRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,12 +15,11 @@ import java.util.List;
 @Service
 public class ToDoService {
 
-    ModelMapper modelMapper;
     ToDoRepository toDoRepository;
 
     @Transactional(readOnly = true)
     public List<ToDoDto> findAll() {
-        return toDoRepository.findAll().stream().map(this::toDto)
+        return toDoRepository.findAllWithEvents().stream().map(this::toDto)
                 .toList();
     }
 
@@ -31,10 +28,10 @@ public class ToDoService {
     }
 
     private ToDo toModel(ToDoDto toDoDto) {
-        return modelMapper.map(toDoDto, ToDo.class);
+        return ToDo.builder().name(toDoDto.name()).events(toDoDto.events()).build();
     }
 
     private ToDoDto toDto(ToDo toDo) {
-        return modelMapper.map(toDo, ToDoDto.class);
+        return new ToDoDto(toDo.getName(),toDo.getEvents());
     }
 }
