@@ -1,5 +1,6 @@
-package ru.skb.consumer.config;
+package com.example.consumer_rework.config;
 
+import com.example.consumer_rework.dto.MessageDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.CommonLoggingErrorHandler;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import ru.skb.consumer.dto.MessageDto;
 
 @Configuration
 @AllArgsConstructor

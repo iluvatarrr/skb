@@ -1,4 +1,4 @@
 rootProject.name = 'skb-spring'
 
 includeBuild 'producer'
-includeBuild 'consumer'
+includeBuild 'consumer_rework'
