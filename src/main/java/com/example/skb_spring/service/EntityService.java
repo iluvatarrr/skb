@@ -22,19 +22,13 @@ public class EntityService {
     public void save() {
         //TODO: тут могла быть реализация сохранения с репо и DTO
         log.info("log EntityCreatedEvent: save");
-        eventPublisher.publishEvent(new EntityCreatedEvent(1));
+        eventPublisher.publishEvent(new EntityCreatedEvent(1)); //опубликуется
     }
 
-    @Transactional
     public void subSave() {
         //TODO: тут могла быть реализация сохранения с репо и DTO
-        try {
-            if (true) throw new RuntimeException();
-            log.info("log EntityCreatedEvent: subSave (never)");
-            eventPublisher.publishEvent(new EntitySubCreatedEvent(2));
-        } catch (Exception exception) {
-            log.error("log EntityCreatedEvent: error subSave", exception);
-            throw exception;
-        }
+        log.info("log EntityCreatedEvent: subSave");
+        eventPublisher.publishEvent(new EntitySubCreatedEvent(2)); //не опубликуется
     }
+
 }
