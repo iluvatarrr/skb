@@ -14,4 +14,11 @@ public class AopController {
     public void checkAOP() {
         log.info("AOP RateLimit");
     }
+
+    //копипаст для проверки , что счетчик не общий
+    @RequestLimit
+    @GetMapping("/aop2")
+    public void checkAOP2() {
+        log.info("AOP2 RateLimit");
+    }
 }
